@@ -5,8 +5,8 @@ const path = require('path');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const checkSession = require('./middlewares/checkSession');
-const { User, Task } = require('./db/models');
-const Bcrypt = require('./utils/bcrypt');
+const authRouter = require('./routers/authRouter');
+const taskRouter = require('./routers/taskRouter');
 
 const app = express();
 
@@ -29,6 +29,9 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(checkSession);
+
+app.use('/', authRouter);
+app.use('/task', taskRouter);
 
 app.listen(process.env.PORT, () => {
   console.log('server start ', process.env.PORT);
