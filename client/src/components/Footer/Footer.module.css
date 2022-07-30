@@ -1,0 +1,16 @@
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  font-size: 12px;
+  height: 100px;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.footerLink {
+  text-decoration: none;
+  color: #7c7c7d;
+}

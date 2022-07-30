@@ -10,9 +10,15 @@ const taskRouter = require('./routers/taskRouter');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  credentials: true,
+  origin: 'http://localhost:3000',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(process.env.PWD, 'public')));
 
 const sessionConfig = {
   name: 'cook',
