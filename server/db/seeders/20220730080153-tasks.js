@@ -17,6 +17,22 @@ module.exports = {
         text: 'Do not kill my self',
         user_id: 1,
       },
+      {
+        text: 'Task for user_2',
+        user_id: 2,
+      },
+      {
+        text: 'One more task for bla',
+        user_id: 2,
+      },
+      {
+        text: 'Task for user_3',
+        user_id: 3,
+      },
+      {
+        text: 'One more task for Ww',
+        user_id: 3,
+      },
     ]);
   },
 

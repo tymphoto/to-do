@@ -1,12 +1,15 @@
 const express = require('express');
 
 const router = express.Router();
-const { Task } = require('../db/models');
+const { User, Task } = require('../db/models');
 
 router.get('/', async (req, res) => {
   try {
-    const result = await Task.findAll({ where: { user_id: req.session.userId } });
-    res.json(result);
+    const tasks = await Task.findAll({
+      attributes: ['id', 'text'],
+      include: { model: User, attributes: ['name', 'email', 'id'] },
+    });
+    res.json(tasks);
   } catch (error) {
     console.log(error);
     res.json(error);

@@ -6,8 +6,9 @@ const Bcrypt = require('../utils/bcrypt');
 
 router.get('/auth', async (req, res) => {
   try {
-    const result = await User.findByPk(req.session.userId);
-    res.json(result);
+    const user = await User.findByPk(req.session.userId);
+    console.log('===========<<<<', user);
+    res.json({ id: user.id, name: user.name, email: user.email });
   } catch (error) {
     console.log(error);
     res.json(error);
@@ -36,7 +37,7 @@ router.post('/register', async (req, res) => {
     if (result.id) {
       req.session.userName = result.name;
       req.session.userId = result.id;
-      return res.json(result);
+      return res.json({ id: result.id, name: result.name, email: result.email });
     }
     throw Error(result);
   } catch (error) {
@@ -52,7 +53,7 @@ router.post('/login', async (req, res) => {
     if (await Bcrypt.compare(password, result.password)) {
       req.session.userName = result.name;
       req.session.userId = result.id;
-      req.session.save(() => res.json(result));
+      req.session.save(() => res.json({ id: result.id, name: result.name, email: result.email }));
       console.log('---', req.session);
     }
   } catch (error) {

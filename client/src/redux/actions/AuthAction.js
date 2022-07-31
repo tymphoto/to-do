@@ -11,6 +11,7 @@ export const userAuthThunk = (loginToggle, body) => async (dispatch) => {
     loginToggle ? `${process.env.REACT_APP_SERVER_PATH}/login` : `${process.env.REACT_APP_SERVER_PATH}/register`,
     {
       credentials: 'include',
+      mode: 'cors',
       method: 'post',
       headers: {
         'Content-type': 'application/json',
@@ -26,12 +27,12 @@ export const userAuthThunk = (loginToggle, body) => async (dispatch) => {
 };
 
 export const userCheckAuthThunk = () => async (dispatch) => {
-  const response = await fetch(`${process.env.REACT_APP_SERVER_PATH}/auth`, { credentials: 'include' });
+  const response = await fetch(`${process.env.REACT_APP_SERVER_PATH}/auth`, { credentials: 'include', mode: 'cors' });
   const result = await response.json();
   dispatch(checkUser(result));
 };
 
 export const userLogoutThunk = () => async (dispatch) => {
-  await fetch(`${process.env.REACT_APP_SERVER_PATH}/logout`, { credentials: 'include' });
+  await fetch(`${process.env.REACT_APP_SERVER_PATH}/logout`, { credentials: 'include', mode: 'cors' });
   dispatch(userLogout());
 };

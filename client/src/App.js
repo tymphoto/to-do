@@ -6,6 +6,7 @@ import NavbarBootstrap from './components/Navbar/NavbarBootstrap';
 import AuthRoute from './components/AuthRoute/AuthRoute';
 import UserForm from './components/UserForm/UserForm';
 import Footer from './components/Footer/Footer';
+import TaskList from './components/TaskList/TaskList';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           <Route
             path="/"
             element={(
-              <AuthRoute />
+              <TaskList />
             )}
           />
 
