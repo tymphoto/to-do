@@ -25,7 +25,7 @@ h1 {
   border: 2px solid rgb(71, 107, 158);
   margin-top: 15px;
   border-radius: 5px;
-  width: 700px;
+  width: 500px;
 }
 
 .myBtn {
@@ -51,21 +51,8 @@ h1 {
   border-radius: 4px;
 }
 
-.checkBox {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #555555;
-  border-radius: 3px;
-  background-color: white;
-}
-
 .text-through {
   text-decoration: line-through;
 }
 
-.userForm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 800px;
-}
+

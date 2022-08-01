@@ -1,5 +1,5 @@
 import {
-  GET_TASKS, DELETE_TASK, UPDATE_TASK, CREATE_TASK,
+  GET_TASKS, DELETE_TASK, UPDATE_TASK, CREATE_TASK, CHANGE_STATUS_TASK,
 } from '../constants/constants';
 
 const initialState = [];
@@ -15,6 +15,8 @@ const taskReducer = (state = initialState, action) => {
     case CREATE_TASK:
       return [...state, payload];
     case UPDATE_TASK:
+      return state.map((task) => (task.id === payload.id ? payload : task));
+    case CHANGE_STATUS_TASK:
       return state.map((task) => (task.id === payload.id ? payload : task));
     default:
       return state;

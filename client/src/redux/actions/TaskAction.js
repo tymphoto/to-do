@@ -1,11 +1,12 @@
 import {
-  GET_TASKS, DELETE_TASK, UPDATE_TASK, CREATE_TASK,
+  GET_TASKS, DELETE_TASK, UPDATE_TASK, CREATE_TASK, CHANGE_STATUS_TASK,
 } from '../constants/constants';
 
 export const getTasks = (data) => ({ type: GET_TASKS, payload: data });
 export const deleteTask = (id) => ({ type: DELETE_TASK, payload: id });
 export const createTask = (data) => ({ type: CREATE_TASK, payload: data });
 export const updateTask = (data) => ({ type: UPDATE_TASK, payload: data });
+export const changeStatusTask = (data) => ({ type: CHANGE_STATUS_TASK, payload: data });
 
 export const getTasksThunk = () => async (dispatch) => {
   const response = await fetch(`${process.env.REACT_APP_SERVER_PATH}/task`, { credentials: 'include' });
@@ -52,5 +53,18 @@ export const updateTaskThunk = (data, id) => async (dispatch) => {
   if (response.ok) {
     const result = await response.json();
     dispatch(updateTask(result));
+  }
+};
+
+export const changeStatusTaskThunk = (id) => async (dispatch) => {
+  const response = await fetch(`${process.env.REACT_APP_SERVER_PATH}/task/updatestatus/${id}`, {
+    credentials: 'include',
+    method: 'put',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify({ status: '✅ done' }),
+  });
+  if (response.ok) {
+    const result = await response.json();
+    dispatch(changeStatusTask(result));
   }
 };

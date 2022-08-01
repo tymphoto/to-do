@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTaskThunk } from '../../redux/actions/TaskAction';
 
 function TaskForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state);
   const [task, setTask] = useState({ text: '', user_id: '' });
   const [form, setForm] = useState({});
@@ -13,6 +15,7 @@ function TaskForm() {
     e.preventDefault();
     dispatch(createTaskThunk(newTask));
     setForm({});
+    navigate('/');
   };
 
   return (
@@ -22,7 +25,7 @@ function TaskForm() {
         type="text"
         placeholder="Задача"
         value={task.text}
-        onChange={(e) => setTask({ text: e.target.value, user_id: '2' })}
+        onChange={(e) => setTask({ text: e.target.value, user_id: user.id })}
       />
       <Button type="submit" variant="outline-primary" onClick={(e) => addNewTask(task, e)}>Новая задача</Button>
     </form>

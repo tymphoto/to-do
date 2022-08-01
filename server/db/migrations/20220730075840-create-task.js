@@ -10,6 +10,9 @@ module.exports = {
       text: {
         type: Sequelize.TEXT,
       },
+      status: {
+        type: Sequelize.STRING,
+      },
       user_id: {
         allowNull: true,
         type: Sequelize.INTEGER,

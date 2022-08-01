@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import { updateTaskThunk, deleteTaskThunk } from '../../redux/actions/TaskAction';
+import { updateTaskThunk, deleteTaskThunk, changeStatusTaskThunk } from '../../redux/actions/TaskAction';
 import MyButton from '../MyButton/MyButton';
 
 function Task({ task, id }) {
@@ -22,8 +22,6 @@ function Task({ task, id }) {
   return (
     <div className="task">
       <div className={style ? 'task_container text-through' : 'task_container'}>
-
-        {user?.id === 1 ? <input className="checkBox mt-1 mb-2" type="checkbox" onClick={() => setStyle(!style)} /> : ''}
         <p>
           Задачу создал:
           {' '}
@@ -35,6 +33,21 @@ function Task({ task, id }) {
           {task.User.email}
         </p>
         <p>{task.text}</p>
+        <p>
+          {task.status}
+          {' '}
+          {user?.id === 1 && task.status === 'not done'
+            ? (
+              <Button
+                type="button"
+                variant="success"
+                onClick={() => { dispatch(changeStatusTaskThunk(id)); setStyle(!style); }}
+              >
+                Отметить выполненным
+
+              </Button>
+            ) : '' }
+        </p>
 
         {user?.id === 1 ? <MyButton type="button" func={deleteTaskThunk(id)}>Удалить</MyButton> : ''}
         {user?.id === 1 ? (

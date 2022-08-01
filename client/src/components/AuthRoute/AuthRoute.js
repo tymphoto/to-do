@@ -12,8 +12,6 @@ function AuthRoute({ children }) {
     }
   }, []);
 
-  console.log(user);
-
   return (
     <div>{children}</div>
   );
